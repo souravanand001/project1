@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block css %}
+{% endblock %}
+
+{% block main %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="card border-info mb-3" style="max-width: 16rem; height: 16rem; margin-top: 1rem;">
+                <div class="card-body text-info">
+                    <h3 class="card-title">{{ book.title }}</h3>
+                    <span class="card-title">ISBN: {{ book.isbn }}</span>
+                    <br>
+                    <span class="card-text">Author: {{ book.author }}</span>
+                    <br>
+                    <span class="card-text">Published in: {{ book.years }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <div class="container text-center">
+                <h3 style="margin-top: 8rem; text-align: right;">{{ g_rating }}</h3>
+            </div>
+        </div>
+    </div>
+    {% if allow_review != 'false' %}
+    <div class="row">
+        <div class="col-lg-3">
+            <select name="rating" class="browser-default custom-select" form="review-form" required="">
+                <option selected>Select your rating</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+                <option value="4">Four</option>
+                <option value="5">Five</option>
+            </select>
+        </div>
+        <div class="col-lg-7">
+            <form id="review-form" action="{{ url_for('review_submit', isbn=book.isbn) }}" method="POST">
+                <input name="review" type="text" class="form-control" placeholder="Leave your review" required="" />
+            </form>
+        </div>
+        <div class="col-lg-2">
+            <button class="btn btn-primary btn-block" type="submit" form="review-form">Submit</button>
+        </div>
+    </div>
+    {% endif %}
+    {% for review in reviews %}
+    <div class="form-control" style="margin-top: 1rem;">
+        <div class="row">
+            <div class="col-lg-3">
+                <p>{{ review.username }}</p>
+                <p>Rated {{ review.rating }} Star</p>
+            </div>
+            <div class="col-lg-9" style="display: flex;
+            justify-content: center;
+            align-content: center;
+            flex-direction: column;">
+                <p style="word-wrap: break-word">{{ review.review }}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

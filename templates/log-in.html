@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="{{ url_for('static', filename='css/sign-up.css') }}" rel="stylesheet">
+  <title>My WebPage</title>
+</head>
+
+<body class="text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <form class="form-signin box" action="{{ url_for('log_in') }}" method="POST">
+          <h1 class="h3 mb-3 font-weight-normal">Please Log In</h1>
+          <input type="email" name="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+          <input type="password" name="inputPassword" class="form-control" placeholder="Password" required="">
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+          <a href="{{ url_for('sign_in') }}" class="btn btn-lg btn-primary btn-block" type="button">Register</a>
+          <p class="error">{{ note }}</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
